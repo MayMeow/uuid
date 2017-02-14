@@ -1,0 +1,18 @@
+<phpunit
+        colors="never"
+>
+    <testsuites>
+        <testsuite name="uuid">
+            <file>tests/UuidTest.php</file>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <blacklist>
+            <directory>vendor</directory>
+            <directory>tests</directory>
+        </blacklist>
+        <whitelist>
+            <directory>src</directory>
+        </whitelist>
+    </filter>
+</phpunit>
