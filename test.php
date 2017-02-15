@@ -18,4 +18,4 @@ print_r("Version 4: " . $uuidv4 . "\n");
 print_r("Version 5: " . $uuidv5 . "\n");
 
 $valid = UUID::is_valid('454eb932-adf4-52a5-9285-31ccebc92e96');
-print_r($valid);
+var_dump($valid);

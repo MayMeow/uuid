@@ -107,6 +107,6 @@ class Uuid {
      * @return bool
      */
     public static function is_valid($uuid) {
-		return preg_match(self::VALID_PATTERN, $uuid) === 1;
+		return preg_match(self::VALID_PATTERN, $uuid) ? true : false;
 	}
 }

@@ -39,4 +39,18 @@ class UuidTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('e3cd3b2a-d28a-50d7-820e-42907646f6d8', $uuidv5);
     }
+
+    public function testV4()
+    {
+        $uuidv4 = Uuid::v4();
+
+        $this->assertEquals(true, Uuid::is_valid($uuidv4));
+    }
+
+    public function testIsValid()
+    {
+        $notValidUuid = 'e3cd3b2a-d28a-50d7-820es-42907646f6d8';
+
+        $this->assertEquals(false, Uuid::is_valid($notValidUuid));
+    }
 }
