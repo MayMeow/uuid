@@ -13,100 +13,98 @@
 
 namespace MayMeow;
 
-class Uuid {
-
+class Uuid
+{
     /**
-     * When this namespace is specified, the name string is a fully-qualified domain name.
-     * @link http://tools.ietf.org/html/rfc4122#appendix-C
-     */
-    const NAMESPACE_DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
-    /**
-     * When this namespace is specified, the name string is a URL.
-     * @link http://tools.ietf.org/html/rfc4122#appendix-C
-     */
-    const NAMESPACE_URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
-    /**
-     * When this namespace is specified, the name string is an ISO OID.
-     * @link http://tools.ietf.org/html/rfc4122#appendix-C
-     */
-    const NAMESPACE_OID = '6ba7b812-9dad-11d1-80b4-00c04fd430c8';
-    /**
-     * When this namespace is specified, the name string is an X.500 DN in DER or a text output format.
-     * @link http://tools.ietf.org/html/rfc4122#appendix-C
-     */
-    const NAMESPACE_X500 = '6ba7b814-9dad-11d1-80b4-00c04fd430c8';
-    /**
-     * The nil UUID is special form of UUID that is specified to have all 128 bits set to zero.
-     * @link http://tools.ietf.org/html/rfc4122#section-4.1.7
-     */
-    const NIL = '00000000-0000-0000-0000-000000000000';
-
-    private static $factory = null;
-
-    /**
-     * Validation Pattern
-     */
-    const VALID_PATTERN = '/^\{?[0-9a-f]{8}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?[0-9a-f]{12}\}?$/i';
-
-    /**
-     * Generate version 3 UUID based on sha1 hash of namespace and name
-     *
-     * @param $namespace UUID
-     * @param $name string
-     * @return bool|string
-     */
-    public static function v3($namespace, $name)
-    {
-        if(!self::is_valid($namespace)) return false;
-
-        return self::_getFactory()->uuidV3($namespace, $name);
-
-    }
-
-    /**
-     * Generate version 4 random UUID
-     *
-     * @return string
-     */
-    public static function v4()
-    {
-        return self::_getFactory()->uuidV4();
-    }
-
-    /**
-     * Generate version 5 UUID based on sha1 has of namespace and name.
+     * Generate UUID version 3
      *
      * @param $namespace
      * @param $name
-     * @return bool|string
+     * @return string
      */
-    public static function v5($namespace, $name)
+    public function uuidV3($namespace, $name)
     {
-        if(!self::is_valid($namespace)) return false;
+        $string = $this->getFromNameAndNs($namespace, $name, 'md5');
 
-        return self::_getFactory()->uuidV5($namespace, $name);
+        return $this->getFromHash($string, 3);
     }
 
     /**
-     * Function _getFactory
-     * @return UuidFactory|null
-     */
-    private static function _getFactory()
-    {
-        if(!self::$factory) {
-            self::$factory = new UuidFactory();
-        }
-
-        return self::$factory;
-    }
-
-    /**
-     * Check UUID agains validation pattern
+     * Generate UUID version 4
      *
-     * @param $uuid
-     * @return bool
+     * @return string
      */
-    public static function is_valid($uuid) {
-		return preg_match(self::VALID_PATTERN, $uuid) ? true : false;
-	}
+    public function uuidV4()
+    {
+        if (function_exists('random_bytes')) {
+            $bytes = random_bytes(16);
+        } else {
+            $bytes = openssl_random_pseudo_bytes(16);
+        }
+        $hash = bin2hex($bytes);
+
+        return $this->getFromHash($hash, 4);
+    }
+
+    /**
+     * Generate UUID version 5
+     *
+     * @param $namespace
+     * @param $name
+     * @return string
+     */
+    public function uuidV5($namespace, $name)
+    {
+        $string = $this->getFromNameAndNs($namespace, $name, 'sha1');
+
+        return $this->getFromHash($string, 5);
+    }
+
+    /**
+     * Generate hash from, namespace and hash function.
+     *
+     * @param $namespace UUID
+     * @param $name string
+     * @param $hash
+     * @return mixed
+     */
+    protected function getFromNameAndNs($namespace, $name, $hash)
+    {
+        $nhex = str_replace(array('-','{','}'), '', $namespace);
+        $nstr = '';
+
+        for($i = 0; $i < strlen($nhex); $i+=2)
+		{
+			$nstr .= chr(hexdec($nhex[$i].$nhex[$i+1]));
+		}
+
+        return $hash($nstr . $name);
+    }
+
+    /**
+     * Generate UUID from hash and version.
+     *
+     * @param $hash
+     * @param $version
+     * @return string
+     */
+    protected function getFromHash($hash, $version)
+    {
+        return sprintf('%08s-%04s-%04x-%04x-%12s',
+    		// 32 bits for "time_low"
+    		substr($hash, 0, 8),
+    		// 16 bits for "time_mid"
+    		substr($hash, 8, 4),
+    		// 16 bits for "time_hi_and_version",
+    		// four most significant bits holds version number 4
+    		(hexdec(substr($hash, 12, 4)) & 0x0fff) | $version << 12,
+    		// 16 bits, 8 bits for "clk_seq_hi_res",
+    		// 8 bits for "clk_seq_low",
+    		// two most significant bits holds zero and one for variant DCE1.1
+    		(hexdec(substr($hash, 16, 4)) & 0x3fff) | 0x8000,
+    		// 48 bits for "node"
+    		substr($hash, 20, 12)
+		);
+    }
+
 }

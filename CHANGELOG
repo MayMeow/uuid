@@ -1,0 +1,3 @@
+v 2.0
+
+Change design pattern. Factory is now correct name UuidFactory and UuidFactory was renamed to Uuid

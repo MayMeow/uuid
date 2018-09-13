@@ -20,37 +20,38 @@
 
 namespace tests;
 
-use MayMeow\Uuid;
+use MayMeow\UuidFactory;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
-class UuidTest extends \PHPUnit_Framework_TestCase
+class UuidTest extends BaseTestCase
 {
     public function testV3()
     {
-        $uuidv3 = Uuid::v3(Uuid::NAMESPACE_DNS, 'test.maymeow.click');
+        $uuidv3 = UuidFactory::v3(UuidFactory::NAMESPACE_DNS, 'test.maymeow.click');
 
         $this->assertEquals('14543655-8766-3363-8ca4-a0b5b4c64124', $uuidv3);
     }
 
     public function testV5()
     {
-        $uuidv5 = Uuid::v5(Uuid::NAMESPACE_DNS, 'test.maymeow.click');
+        $uuidv5 = UuidFactory::v5(UuidFactory::NAMESPACE_DNS, 'test.maymeow.click');
 
         $this->assertEquals('e3cd3b2a-d28a-50d7-820e-42907646f6d8', $uuidv5);
     }
 
     public function testV4()
     {
-        $uuidv4 = Uuid::v4();
+        $uuidv4 = UuidFactory::v4();
 
-        $this->assertEquals(true, Uuid::is_valid($uuidv4));
+        $this->assertEquals(true, UuidFactory::is_valid($uuidv4));
     }
 
     public function testIsValid()
     {
         $notValidUuid = 'e3cd3b2a-d28a-50d7-820es-42907646f6d8';
 
-        $this->assertEquals(false, Uuid::is_valid($notValidUuid));
+        $this->assertEquals(false, UuidFactory::is_valid($notValidUuid));
     }
 }

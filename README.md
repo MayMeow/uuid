@@ -21,11 +21,20 @@ composer require maymeow/uuid
 
 ### Generating UUID v3
 
+Include uuid factory in your project
+
+```php
+use MayMeow\UuidFactory;
+```
+
 To generate UUID version 3 from namespace and name:
 
 ```php
 // Version 3 uuid for DNS
-$uuidv3 = UUID::v3(UUID::NAMESPACE_DNS, 'test.maymeow.click');
+$uuidv3 = Uuid::v3(Uuid::NAMESPACE_DNS, 'test.maymeow.click');
+
+// From v2.0
+$uuidv3 = UuidFactory::v3(UuidFactory::NAMESPACE_DNS, 'test.maymeow.click');
 ```
 
 ### Generating UUID v4
@@ -34,7 +43,10 @@ To generate UUID version 3 - random UUID
 
 ```php
 // Version 3 uuid for DNS
-$uuidv4 = UUID::v4();
+$uuidv4 = Uuid::v4();
+
+// From v2.0
+$uuidv4 = UuidFactory::v4();
 ```
 
 ### Generating UUID v5
@@ -42,15 +54,21 @@ $uuidv4 = UUID::v4();
 To generate UUID version 5 from namespace and name:
 
 ```php
-// Version 3 uuid for DNS
-$uuidv3 = UUID::v5(UUID::NAMESPACE_DNS, 'test.maymeow.click');
+// Version 5 uuid for DNS
+$uuidv3 = Uuid::v5(Uuid::NAMESPACE_DNS, 'test.maymeow.click');
+
+//From version 2.0 use UuidFactory instead of Uuid
+$uuidv3 = UuidFactory::v5(UuidFactory::NAMESPACE_DNS, 'test.maymeow.click');
 ```
 
 ### Checking if uuid is valid
 
 ```php
 // Version 3 uuid for DNS
-$response = UUID::is_valid('454eb932-adf4-52a5-9285-31ccebc92e96');
+$response = Uuid::is_valid('454eb932-adf4-52a5-9285-31ccebc92e96');
+
+// From v2.0
+$response = UuidFactory::is_valid('454eb932-adf4-52a5-9285-31ccebc92e96');
 ```
 
 ## Contributing
