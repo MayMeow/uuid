@@ -1,3 +1,8 @@
-v 2.0
+v2.1
+
+* MayMeow\Uuid is now deprecated, use MayMeow\UUID\Uuid insted of it.
+* MayMeow\UuidFactory is now deprecated, use MayMeow\UUID\UuidFactory instead of it.
+
+v2.0
 
 Change design pattern. Factory is now correct name UuidFactory and UuidFactory was renamed to Uuid
