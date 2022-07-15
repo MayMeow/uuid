@@ -1,0 +1,1 @@
+{"version":1,"defects":[],"times":{"tests\\UuidTest::testV3":0.002,"tests\\UuidTest::testV5":0,"tests\\UuidTest::testV4":0,"tests\\UuidTest::testIsValid":0}}
