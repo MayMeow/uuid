@@ -1,4 +1,4 @@
-name: Test against PHP 7
+name: Test against PHP 8
 
 on:
   push:
