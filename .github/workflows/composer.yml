@@ -16,13 +16,3 @@ jobs:
 
     - name: Validate composer.json and composer.lock
       run: composer validate
-      
-    - name: Test against PHP v7
-      uses: MayMeowHQ/composer-run-action@v3
-      with:
-        composer_script: 'test'
-
-    - name: Test Against PHP v8
-      uses: MayMeowHQ/composer-run-action@v7
-      with:
-        composer_script: 'test'
