@@ -1,7 +1,5 @@
 # UUID generator
 
-[![Build Status](https://travis-ci.org/MayMeow/uuid.svg?branch=master)](https://travis-ci.org/MayMeow/uuid)
-
 Simple library to generating RFC 4122 version 3,4 and 5 UUID (Universaly Unique Identifier).
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Universally_unique_identifier):A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems. Microsoft uses the term globally unique identifier (GUID), either as a synonym for UUID or to refer to a particular UUID variant.
@@ -81,8 +79,7 @@ $response = UuidFactory::is_valid('454eb932-adf4-52a5-9285-31ccebc92e96');
 
 ## Credits
 
-[Charlotta Jung - MayMeow](https://github.com/MayMeow)
-
+[May Meow](https://github.com/MayMeow)
 ## License
 
-MIT [LICENSE][]
+[MIT](/LICENSE)
