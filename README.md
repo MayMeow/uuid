@@ -1,5 +1,10 @@
 # UUID generator
 
+*Message from creator* <br />
+*Thank you for visiting **@maymeow/uuid** project. I found that this project was downloaded nearly 50k times. If you found this project usefull i encourage you to star this project. Staring a prepository here on Github is a one of ways to show support for project and can hepls to increase the visibilit and to let the community know that is a valuable. Thank you!*
+
+*May*
+
 Simple library to generating RFC 4122 version 3,4 and 5 UUID (Universaly Unique Identifier).
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Universally_unique_identifier):A universally unique identifier (UUID) is a 128-bit number used to identify information in computer systems. Microsoft uses the term globally unique identifier (GUID), either as a synonym for UUID or to refer to a particular UUID variant.
