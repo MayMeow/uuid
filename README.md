@@ -1,7 +1,7 @@
 # UUID generator
 
 *Message from creator* <br />
-*Thank you for visiting **@maymeow/uuid** project. I found that this project was downloaded nearly 50k times. If you found this project usefull i encourage you to star this project. Staring a prepository here on Github is a one of ways to show support for project and can hepls to increase the visibilit and to let the community know that is a valuable. Thank you!*
+*Thank you for visiting the **@maymeow/uuid** project. I found that this project was downloaded nearly 50k times. If you found this project useful I encourage you to star this project. Staring a prepository here on Github is one of the ways to show support for the project and can hepl to increase visibility and to let the community know that is a valuable. Thank you!*
 
 *May*
 
